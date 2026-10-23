@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    # Explicit tag: bump it (v1 -> v2 ...) whenever the app changes and a
+    # rebuild is required, otherwise compose reuses the cached image.
+    image: hangman-minecraft-web:1
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
+    networks:
+      - dokploy
+
+networks:
+  dokploy:
+    external: true
+    name: dokploy-network
